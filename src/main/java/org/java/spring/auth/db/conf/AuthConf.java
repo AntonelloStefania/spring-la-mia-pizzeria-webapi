@@ -15,7 +15,9 @@ public class AuthConf {
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-		http.authorizeHttpRequests()
+		http.csrf().disable()
+		.cors().disable()
+		.authorizeHttpRequests()
 		.requestMatchers("/pizze/create").hasAnyAuthority("ADMIN")
 		.requestMatchers("/pizza/edit/{id}").hasAnyAuthority("ADMIN")
 		.requestMatchers("/pizza/delete/{id}").hasAnyAuthority("ADMIN")
@@ -24,6 +26,7 @@ public class AuthConf {
 		.requestMatchers("pizza/{id}/discount/create").hasAnyAuthority("ADMIN")
 		.requestMatchers("/pizza/{id}/discount/{discount_id}").hasAnyAuthority("ADMIN")
 		.requestMatchers("/api/v1.0/**").permitAll()
+		.requestMatchers("/api/v1.0/pizzas/**").permitAll()
 		.requestMatchers("/**").hasAnyAuthority("USER", "ADMIN")
 		.and().formLogin()
 		.and().logout()
