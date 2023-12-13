@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css} "/>
+</head>
+<body>
+	<div th:replace="frags::header"></div>
+	<div class="container">
+			<div class="col-12 text-end" sec:authorize="hasAuthority('ADMIN')">
+				<a class="btn btn-success my-5 fw-bold" th:href="@{/pizza/{id}/discount/create (id=${pizza.id})}">Aggiungi offerta</a>
+			</div>
+		<div class="row">
+			<div th:replace="frags::home" class="my-5"></div>
+			<div class="col-12 text-center my-5">
+				<h1>[[${pizza.name}]]</h1>
+				<img th:src="${pizza.photo}" alt="pizza img" class="my-5 w-75">
+				<p>[[${pizza.description}]]</p>
+				<span class="fw-bold">Prezzo: [[${pizza.price}]]€</span>
+			</div>
+		</div>
+		<div class="row" th:if="${!pizza.discounts.isEmpty()}">
+			<table class="table my-5">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nome Offerta</th>
+			      <th scope="col">Data inizio</th>
+			      <th scope="col">Data Fine</th>
+			      <th scope="col">Modifica</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="discount : ${pizza.discounts}"
+			    	th:object="${discount}">			      
+			      <td>[[*{name}]]</td>
+			      <td>[[*{start_date}]]</td>
+			      <td>[[*{end_date}]]</td>
+			      <td sec:authorize="hasAuthority('ADMIN')">
+					  <a class="btn btn-warning" 
+					  	 th:href="@{/pizza/{id}/discount/{discount_id}(id=${pizza.id}, discount_id=${discount.id})}">Modifica</a>
+				  	</td>
+			    </tr>			    
+			  </tbody>
+			</table>
+		</div>
+		<div class="row" th:if"${!pizza.ingredients.isEmpty()}">
+			<div class="col-6 offset-3 text-center">
+				<h3>Ingredienti</h3>
+				<ul class="list-unstyled">
+					<li 
+					th:each="ingredient : ${pizza.ingredients}"
+					th:object="${ingredient}"
+					>
+						[[*{name}]]
+					</li>
+				</ul>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

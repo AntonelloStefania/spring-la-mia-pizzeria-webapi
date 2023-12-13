@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css} "/>
+</head>
+<body>
+	<div th:include="frags::home" class="my-5 container"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="my-5">Aggiungi un'offerta</h1>
+				<div class="text-start">				
+					<form
+						method="POST"
+						>
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<div class="col-12 d-flex">
+				         
+				         <div class="form-group my-3 col-8">
+				            <label for="name" class="control-label mb-2">Nome offerta</label>
+				            <input type="text" class="form-control" id="name" name="name" th:field="${discount.name}">				         	
+				         </div>
+						</div>
+				     	<div class="col-12 d-flex">
+						<div class="form-group my-3 col me-2">
+				            <label for="start_date" class="control-label mb-2">Data inizio <span th:if="${discount.start_date} != null">(attuale [[${discount.start_date}]])</span></label>
+				            <input type="date" class="form-control mask-money" id="start_date" name="start_date" >
+				     	</div>
+							 
+				     	<div class="form-group my-3 col">
+				            <label for="end_date" class="control-label mb-2">Data fine <span th:if="${discount.start_date} != null">(attuale [[${discount.end_date}]] )</span></label>
+				            <input type="date" class="form-control mask-money" id="end_date" name="end_date"  >
+				     	</div>
+						 </div>
+				     	<div class="text-end mt-4">
+							<button type="submit" class="btn btn-success">Aggiungi</button>  
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

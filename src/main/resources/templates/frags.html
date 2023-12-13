@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="header" class="mb-5">
+		<nav class="navbar navbar-light bg-light px-5">
+		  <div class="container py-3">
+		    <a class="navbar-brand fw-bolder">Pizzeria</a>
+		    <form class="d-flex">
+		      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" th:value="${search}">
+		      <button class="btn btn-outline-success" type="submit">Search</button>
+		    </form>
+		    <div>
+				<a href="/logout" class="btn btn-sm btn-outline-danger">Logout</a>
+			</div>
+		  </div>
+		</nav>
+	</div>
+	
+	
+	<div class="container" th:fragment="home">
+		<div class="row">
+			<div class="col-12">
+				<a th:href="@{/}" class="btn btn-sm btn-outline-warning fw-bold">Home Page</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-12 text-danger" th:fragment="errorDiv(field)"
+     th:if="${#fields.hasErrors(field)}">
+	    <ul>
+	        <li th:each="err: ${#fields.errors(field)}">
+	            [[${err}]]
+	        </li>
+	    </ul>
+	</div>
+</body>
+</html>
