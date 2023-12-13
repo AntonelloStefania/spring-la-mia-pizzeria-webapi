@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Discount {
 	private LocalDate end_date;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Pizza pizza;
 	
 	public Discount(){ }

@@ -8,6 +8,9 @@ import java.util.List;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,7 +49,7 @@ public class Pizza {
 	@Positive (message="Price cannot be empty or negative")
 	private double price;
 	
-	@OneToMany(mappedBy = "pizza")
+	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE)
 	private List<Discount> discounts;
 	
 	@ManyToMany
@@ -103,6 +106,7 @@ public class Pizza {
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	@JsonIgnore
 	public void setIngredients(Ingredient...ingredients) {
 		setIngredients(Arrays.asList(ingredients));
 		

@@ -4,6 +4,8 @@ package org.java.spring.db.pojo;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +16,7 @@ import jakarta.persistence.ManyToMany;
 public class Ingredient {
 	
 	@ManyToMany(mappedBy = "ingredients")
+	@JsonIgnore
 	private List<Pizza> pizzas;
 	
 	@Id
