@@ -7,7 +7,9 @@ import org.java.spring.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.web.server.ServerHttpSecurity.HttpsRedirectSpec;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +66,15 @@ public class PizzaRestcontroller {
 		pizza.setPrice(updatedPizza.getPrice());
 		
 		pizzaService.save(pizza);
+		return new ResponseEntity<>(pizza, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Pizza> delete(@PathVariable int id){
+		Pizza pizza = pizzaService.findById(id);
+		
+		pizzaService.delete(pizza);
+		
 		return new ResponseEntity<>(pizza, HttpStatus.OK);
 	}
 	
