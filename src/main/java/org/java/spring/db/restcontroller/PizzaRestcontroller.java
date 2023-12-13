@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,8 +25,11 @@ public class PizzaRestcontroller {
 	private PizzaService pizzaService;
 	
 	@GetMapping
-	public ResponseEntity <List<Pizza>> getIndex(){
-		List<Pizza> pizzas = pizzaService.findAll();
+	public ResponseEntity <List<Pizza>> getIndex(@RequestParam(required = false) String name){
+		
+		List<Pizza> pizzas = name == null  
+                ? pizzaService.findAll()
+                : pizzaService.findByName(name);
 		
 		return new ResponseEntity<>(pizzas, HttpStatus.OK);
 	}
