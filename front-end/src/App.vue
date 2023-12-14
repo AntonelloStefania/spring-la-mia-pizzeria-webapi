@@ -14,7 +14,7 @@
           <div class="col-12 text-end my-5">
             <button @click="creatingPizza = true" class="btn btn-sm btn-primary">Aggiungi una nuova pizza</button>
           </div>
-          <pizzaIndex :pizzas="pizzas" @deletePizza="deletePizza"/>
+          <pizzaIndex :pizzas="pizzas" @deletePizza="deletePizza" @search="search = true"/>
         </div>
       </div>
     </div>
@@ -31,12 +31,14 @@ import pizzaForm from './components/pizzaForm.vue';
 
     const pizzas = ref(null);
     const creatingPizza = ref(false);
-   
+    const search = ref(true)
 
 
   const indexPizzas = async () => {
-  const data = await axios.get("http://localhost:8080/api/v1.0/pizzas");
-  pizzas.value = data.data;
+    const data = await axios.get("http://localhost:8080/api/v1.0/pizzas");
+    pizzas.value = data.data;
+ 
+ 
 };
 
 const pizzaCreated = () =>{

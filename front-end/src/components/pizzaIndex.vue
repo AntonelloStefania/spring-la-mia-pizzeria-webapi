@@ -1,7 +1,11 @@
 
 <template>
 <div class="container">
-    <div class="row my-5">   
+    <div class="row my-5"> 
+        <div class="col-6 d-flex">
+            <input type="search" id="search" class="form-control" v-model="search">
+            <button for="search" class=" btn btn-sm btn-success fw-bold" @click="searchPizza" >cerca </button>
+        </div>  
         <div class="col-12 text-center my-5">
             <h1>Pizzas</h1>
         </div>
@@ -31,20 +35,31 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import axios from 'axios';
-const emits = defineEmits(["deletePizza"]);
+const emits = defineEmits(["deletePizza", "search"]);
 
 const deletePizza = async (id) => {
   const data =  await axios.delete(`http://localhost:8080/api/v1.0/pizzas/${id}`);
     emits("deletePizza"); 
   } 
+ 
+  const search = ref('');
+const searchPizza = async()=>{
+    const data = await axios.get(`http://localhost:8080/api/v1.0/pizzas?name=${search.value}`)
+
+    console.log(data)
+    props.pizzas = data.data;
+}
+
 
 const props = defineProps({
   pizzas: {
     type: Array,
     required: true
   }
+  
+
 });
 
 </script>
