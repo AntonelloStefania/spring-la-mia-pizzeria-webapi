@@ -14,7 +14,7 @@
           <div class="col-12 text-end my-5">
             <button @click="creatingPizza = true" class="btn btn-sm btn-primary">Aggiungi una nuova pizza</button>
           </div>
-          <pizzaIndex :pizzas="pizzas" @deletePizza="deletePizza" @search="search = true"/>
+          <pizzaIndex :pizzas="pizzas" @deletePizza="deletePizza" @search="search = true" />
         </div>
       </div>
     </div>
@@ -49,6 +49,7 @@ const pizzaCreated = () =>{
 const deletePizza = () =>{
   indexPizzas();
 }
+
 
 
 
