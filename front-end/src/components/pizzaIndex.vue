@@ -20,6 +20,9 @@
                     <div class="text-end">
                         <span>prezzo: {{ pizza.price }}€</span>
                     </div>
+                    <div class="text-center my-3">
+                        <button class="btn btn-sm btn-danger" @click="deletePizza(pizza.id)">Cancella</button>
+                    </div>
                 </div>
             </div>
           </div>
@@ -28,13 +31,20 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';  
+import { defineProps } from 'vue';
+import axios from 'axios';
+const emits = defineEmits(["deletePizza"]);
+
+const deletePizza = async (id) => {
+  const data =  await axios.delete(`http://localhost:8080/api/v1.0/pizzas/${id}`);
+    emits("deletePizza"); 
+  } 
 
 const props = defineProps({
-    pizzas: {
-        type: Array,
-        required:true
-    }
-
+  pizzas: {
+    type: Array,
+    required: true
+  }
 });
+
 </script>

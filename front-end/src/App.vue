@@ -14,7 +14,7 @@
           <div class="col-12 text-end my-5">
             <button @click="creatingPizza = true" class="btn btn-sm btn-primary">Aggiungi una nuova pizza</button>
           </div>
-          <pizzaIndex :pizzas="pizzas"/>
+          <pizzaIndex :pizzas="pizzas" @deletePizza="deletePizza"/>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ import pizzaForm from './components/pizzaForm.vue';
 
     const pizzas = ref(null);
     const creatingPizza = ref(false);
+   
 
 
   const indexPizzas = async () => {
@@ -42,6 +43,11 @@ const pizzaCreated = () =>{
   creatingPizza.value = false;
   indexPizzas();
 }
+
+const deletePizza = () =>{
+  indexPizzas();
+}
+
 
 
 onMounted(indexPizzas);
