@@ -1,13 +1,29 @@
 
 <template>
-  <div>
-    <h1>Pizzas</h1>
-    <ul>
-      <li v-for="pizza in pizzas" 
-        :key="pizza.id">
-        <p>{{ pizza.name }}</p>
-      </li>
-    </ul>
+<div class="container">
+    <div class="row my-5">   
+        <div class="col-12 text-center my-5">
+            <h1>Pizzas</h1>
+        </div>
+   
+          <div class="d-flex flex-wrap justify-content-center">
+            <div class="card col-3 m-2" v-for="pizza in pizzas" 
+                :key="pizza.id">
+                <div class="card-top">
+                   
+                    <img :src="pizza.photo" class="card-img-top" width="100%" height="200px" >
+                </div>
+                <div class="card-body my-3 d-flex flex-column justify-content-between">
+                    <h4>{{ pizza.name }}</h4>
+                    <p>{{ pizza.description }}</p>
+
+                    <div class="text-end">
+                        <span>prezzo: {{ pizza.price }}€</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
   </div>
 </template>
 
